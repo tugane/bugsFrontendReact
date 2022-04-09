@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUnresolvedBugs, loadBugs, resolveBug } from "../store/bugs";
+import { addBug, getUnresolvedBugs, loadBugs, resolveBug } from "../store/bugs";
 
 function BugsList() {
   const dispatch = useDispatch();
@@ -14,15 +14,31 @@ function BugsList() {
     dispatch(resolveBug(bugId));
   };
 
+  const [bug, setBug] = useState("");
+
   return (
-    <ul>
-      {bugs.map((bug) => (
-        <li key={bug.id}>
-          {bug.description}
-          <button onClick={() => handleResolve(bug.id)}>Resolve</button>
-        </li>
-      ))}
-    </ul>
+    <div
+      style={{
+        padding: "20px",
+      }}
+    >
+      <input
+        type="text"
+        onChange={(event) => setBug(event.target.value)}
+        value={bug}
+      />
+      <button onClick={() => dispatch(addBug({ description: bug }))}>
+        Add
+      </button>
+      <ul>
+        {bugs.map((bug) => (
+          <li key={bug.id}>
+            {bug.description}
+            <button onClick={() => handleResolve(bug.id)}>Resolve</button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

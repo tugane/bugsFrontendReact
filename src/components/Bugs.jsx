@@ -7,6 +7,7 @@ class Bugs extends Component {
   }
   render() {
     return (
+      
       <ul>
         {this.props.bugs.map((bug) => (
           <li key={bug.id}>
