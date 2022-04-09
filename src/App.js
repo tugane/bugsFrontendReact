@@ -1,12 +1,15 @@
-import logo from "./logo.svg";
+import { Provider } from "react-redux";
 import "./App.css";
 import Bugs from "./components/Bugs";
+import configureStore from "./store/configureStore";
+import BugsList from "./components/BugsList";
+const store = configureStore();
 
 function App() {
   return (
-    <div className="App">
-      <Bugs />
-    </div>
+    <Provider store={store}>
+      <BugsList />
+    </Provider>
   );
 }
 
